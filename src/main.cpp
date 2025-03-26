@@ -54,15 +54,6 @@ GLfloat vertices[] =
      0.5f,-0.5f,-0.5f,     0.83f, 0.70f, 0.44f,		1.0f, 1.0f
 };
 
-// GLfloat vertices[] =
-// { //     COORDINATES     /        COLORS      /   TexCoord  //
-// 	-0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
-// 	-0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
-// 	 0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
-// 	 0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
-// 	 0.0f, 0.8f,  0.0f,     0.92f, 0.86f, 0.76f,	2.5f, 5.0f
-// };
-
 // Indices for vertices order
 GLuint indices[] =
 {
@@ -123,6 +114,19 @@ int main()
 	// In this case the viewport goes from x = 0, y = 0, to x = 800, y = 800
 	glViewport(0, 0, window_width, window_height);
 
+	GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+    if (!monitor) {
+        std::cerr << "Failed to get primary monitor!" << std::endl;
+        glfwTerminate();
+        return -1;
+    }
+
+
+	int monitor_width, monitor_height;
+	glfwGetMonitorWorkarea(monitor, NULL, NULL, &monitor_width, &monitor_height);
+
+	glfwSetWindowPos(window, monitor_width, (int)((monitor_height-window_height)/2));
+
 
 
 	// Generates Shader object using shaders defualt.vert and default.frag
@@ -177,8 +181,8 @@ int main()
 	
 		if (timeDiff >= (1.0/30.0))
 		{
-			std::string fps =  "FPS : " +  std::to_string(counter/timeDiff) + "Test";
-			glfwSetWindowTitle(window, fps.c_str());
+			std::cout << "\033[H\033[J"; // clears window idk black magic 
+			std::cout <<  "FPS : " <<  counter/timeDiff << std::endl;
 			prevTime = currTime;
 			counter = 0;
 		}
@@ -199,7 +203,6 @@ int main()
 		VAO1.Bind();
 		// Draw primitives, number of indices, datatype of indices, index of indices
 		glDrawElements(GL_TRIANGLES, sizeof(vertices)/sizeof(int), GL_UNSIGNED_INT, 0);
-		//glDrawArrays(GL_TRIANGLES, 0, sizeof(vertices)/sizeof(int));
 		// Swap the back buffer with the front buffer
 		glfwSwapBuffers(window);
 		// Take care of all GLFW events
