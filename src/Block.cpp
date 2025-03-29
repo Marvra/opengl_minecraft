@@ -8,7 +8,7 @@ Block::Block(std::vector<float>* vertices, std::vector<unsigned int>* indices)
 }
 
 
-void Block::addFace(Sides side, int x, int y, int z, int count)
+void Block::addFace(Sides side, int x, int y, int z, int* count)
 {
     for(int i = 0; i < 4; i++)
     {
@@ -24,8 +24,10 @@ void Block::addFace(Sides side, int x, int y, int z, int count)
 
     for(int i = 0; i < 6; i++)
     {
-        this->indices->push_back(cubeIndices[side][i] + count);
+        this->indices->push_back(cubeIndices[i] + *count);
     }
+    
+    *count += 4;
 }
 
 

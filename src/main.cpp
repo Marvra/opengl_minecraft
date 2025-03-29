@@ -19,6 +19,222 @@
 #define window_height 800
 
 
+// GLfloat vertices[] =
+
+ 
+
+// { //     COORDINATES     /        COLORS      /   	TexCoord  //
+ 
+
+//   //  x	    y      z							  // x	   y	 		 y - up/down //
+ 
+
+//     -0.5f,-0.5f, 0.5f,     0.83f, 0.70f, 0.44f,		0.0f, 0.0f,
+ 
+
+//      0.5f,-0.5f, 0.5f,     0.83f, 0.70f, 0.44f,		1.0f, 0.0f,
+ 
+
+//     -0.5f, 0.5f, 0.5f,     0.83f, 0.70f, 0.44f,		0.0f, 1.0f,
+ 
+
+//      0.5f, 0.5f, 0.5f,     0.83f, 0.70f, 0.44f,		1.0f, 1.0f,
+ 
+
+
+ 
+
+//     -0.5f,-0.5f,-0.5f,     0.83f, 0.70f, 0.44f,		0.0f, 0.0f,
+ 
+
+//      0.5f,-0.5f,-0.5f,     0.83f, 0.70f, 0.44f,		1.0f, 0.0f,
+ 
+
+//     -0.5f, 0.5f,-0.5f,     0.83f, 0.70f, 0.44f,		0.0f, 1.0f,
+ 
+
+//      0.5f, 0.5f,-0.5f,     0.83f, 0.70f, 0.44f,		1.0f, 1.0f,
+ 
+
+
+ 
+
+//     -0.5f,-0.5f, 0.5f,     0.83f, 0.70f, 0.44f,		0.0f, 0.0f,
+ 
+
+//     -0.5f,-0.5f,-0.5f,     0.83f, 0.70f, 0.44f,		1.0f, 0.0f,
+ 
+
+//     -0.5f, 0.5f, 0.5f,     0.83f, 0.70f, 0.44f,		0.0f, 1.0f,
+ 
+
+//     -0.5f, 0.5f,-0.5f,     0.83f, 0.70f, 0.44f,		1.0f, 1.0f,
+ 
+
+
+ 
+
+//      0.5f,-0.5f, 0.5f,     0.83f, 0.70f, 0.44f,		0.0f, 0.0f,
+ 
+
+//      0.5f,-0.5f,-0.5f,     0.83f, 0.70f, 0.44f,		1.0f, 0.0f,
+ 
+
+//      0.5f, 0.5f, 0.5f,     0.83f, 0.70f, 0.44f,		0.0f, 1.0f,
+ 
+
+//      0.5f, 0.5f,-0.5f,     0.83f, 0.70f, 0.44f,		1.0f, 1.0f,
+ 
+
+
+ 
+
+//     -0.5f, 0.5f, 0.5f,     0.83f, 0.70f, 0.44f,		0.0f, 0.0f,
+ 
+
+//      0.5f, 0.5f, 0.5f,     0.83f, 0.70f, 0.44f,		1.0f, 0.0f,
+ 
+
+//     -0.5f, 0.5f,-0.5f,     0.83f, 0.70f, 0.44f,		0.0f, 1.0f,
+ 
+
+//      0.5f, 0.5f,-0.5f,     0.83f, 0.70f, 0.44f,		1.0f, 1.0f,
+ 
+
+
+ 
+
+//     -0.5f,-0.5f, 0.5f,     0.83f, 0.70f, 0.44f,		0.0f, 0.0f,
+ 
+
+//      0.5f,-0.5f, 0.5f,     0.83f, 0.70f, 0.44f,		1.0f, 0.0f,
+ 
+
+//     -0.5f,-0.5f,-0.5f,     0.83f, 0.70f, 0.44f,		0.0f, 1.0f,
+ 
+
+//      0.5f,-0.5f,-0.5f,     0.83f, 0.70f, 0.44f,		1.0f, 1.0f
+ 
+
+// };
+ 
+
+
+ 
+
+// // GLfloat vertices[] =
+ 
+
+// // { //     COORDINATES     /        COLORS      /   TexCoord  //
+ 
+
+// // 	-0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
+ 
+
+// // 	-0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
+ 
+
+// // 	 0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
+ 
+
+// // 	 0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
+ 
+
+// // 	 0.0f, 0.8f,  0.0f,     0.92f, 0.86f, 0.76f,	2.5f, 5.0f
+ 
+
+// // };
+ 
+
+
+ 
+
+// // Indices for vertices order
+ 
+
+// GLuint indices[] =
+ 
+
+// {
+ 
+
+// 	// front side
+ 
+
+// 	1, 0, 2,
+ 
+
+// 	1, 2, 3,
+ 
+
+
+ 
+
+// 	// back side
+ 
+
+// 	4, 5, 6,
+ 
+
+// 	6, 5, 7,
+ 
+
+
+ 
+
+// 	// left side 
+ 
+
+// 	8, 9, 10,
+ 
+
+// 	10, 9, 11,
+ 
+
+
+ 
+
+// 	// right side
+ 
+
+// 	13, 12, 14,
+ 
+
+// 	13, 14, 15,
+ 
+
+
+ 
+
+// 	// top 
+ 
+
+// 	17, 16, 18,
+ 
+
+// 	17, 18, 19,
+ 
+
+
+ 
+
+// 	// bottom
+ 
+
+// 	20, 21, 22,
+ 
+
+// 	22, 21, 23
+ 
+
+// };
+ 
+
+
+ 
+
+
+
 int main()
 {
 	// Initialize GLFW
@@ -76,9 +292,13 @@ int main()
 	VAO1.Bind();
 
 	// Generates Vertex Buffer Object and links it to vertices
-	VBO VBO1(chunk.vertices, chunk.vertices.size() * sizeof(float));
+	VBO VBO1(&chunk.vertices, chunk.vertices.size() * sizeof(float));
 	// Generates Element Buffer Object and links it to indices
-	EBO EBO1(chunk.indices, chunk.indices.size() * sizeof(int));
+	EBO EBO1(&chunk.indices, chunk.indices.size() * sizeof(unsigned int));
+
+	// VBO VBO1(vertices, sizeof(vertices));
+	// EBO EBO1(indices, sizeof(indices));
+	
 
 	// Links VBO to VAO
 	VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
@@ -96,7 +316,6 @@ int main()
 
 
 	glEnable(GL_DEPTH_TEST);
-
 	// glEnable(GL_CULL_FACE);
 	// glCullFace(GL_FRONT);
 	// glFrontFace(GL_CCW);
