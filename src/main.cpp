@@ -13,74 +13,10 @@
 #include"VAO.h"
 #include"VBO.h"
 #include"EBO.h"
+#include"Chunk.h"
 
 #define window_width 800
 #define window_height 800
-
-
-
-// Vertices coordinates
-GLfloat vertices[] =
-{ //     COORDINATES     /        COLORS      /   	TexCoord  //
-  //  x	    y      z							  // x	   y	 		 y - up/down //
-    -0.5f,-0.5f, 0.5f,     0.83f, 0.70f, 0.44f,		0.0f, 0.0f,
-     0.5f,-0.5f, 0.5f,     0.83f, 0.70f, 0.44f,		1.0f, 0.0f,
-    -0.5f, 0.5f, 0.5f,     0.83f, 0.70f, 0.44f,		0.0f, 1.0f,
-     0.5f, 0.5f, 0.5f,     0.83f, 0.70f, 0.44f,		1.0f, 1.0f,
-
-    -0.5f,-0.5f,-0.5f,     0.83f, 0.70f, 0.44f,		0.0f, 0.0f,
-     0.5f,-0.5f,-0.5f,     0.83f, 0.70f, 0.44f,		1.0f, 0.0f,
-    -0.5f, 0.5f,-0.5f,     0.83f, 0.70f, 0.44f,		0.0f, 1.0f,
-     0.5f, 0.5f,-0.5f,     0.83f, 0.70f, 0.44f,		1.0f, 1.0f,
-
-    -0.5f,-0.5f, 0.5f,     0.83f, 0.70f, 0.44f,		0.0f, 0.0f,
-    -0.5f,-0.5f,-0.5f,     0.83f, 0.70f, 0.44f,		1.0f, 0.0f,
-    -0.5f, 0.5f, 0.5f,     0.83f, 0.70f, 0.44f,		0.0f, 1.0f,
-    -0.5f, 0.5f,-0.5f,     0.83f, 0.70f, 0.44f,		1.0f, 1.0f,
-
-     0.5f,-0.5f, 0.5f,     0.83f, 0.70f, 0.44f,		0.0f, 0.0f,
-     0.5f,-0.5f,-0.5f,     0.83f, 0.70f, 0.44f,		1.0f, 0.0f,
-     0.5f, 0.5f, 0.5f,     0.83f, 0.70f, 0.44f,		0.0f, 1.0f,
-     0.5f, 0.5f,-0.5f,     0.83f, 0.70f, 0.44f,		1.0f, 1.0f,
-
-    -0.5f, 0.5f, 0.5f,     0.83f, 0.70f, 0.44f,		0.0f, 0.0f,
-     0.5f, 0.5f, 0.5f,     0.83f, 0.70f, 0.44f,		1.0f, 0.0f,
-    -0.5f, 0.5f,-0.5f,     0.83f, 0.70f, 0.44f,		0.0f, 1.0f,
-     0.5f, 0.5f,-0.5f,     0.83f, 0.70f, 0.44f,		1.0f, 1.0f,
-
-    -0.5f,-0.5f, 0.5f,     0.83f, 0.70f, 0.44f,		0.0f, 0.0f,
-     0.5f,-0.5f, 0.5f,     0.83f, 0.70f, 0.44f,		1.0f, 0.0f,
-    -0.5f,-0.5f,-0.5f,     0.83f, 0.70f, 0.44f,		0.0f, 1.0f,
-     0.5f,-0.5f,-0.5f,     0.83f, 0.70f, 0.44f,		1.0f, 1.0f
-};
-
-// Indices for vertices order
-GLuint indices[] =
-{
-	// front side
-	1, 0, 2,
-	1, 2, 3,
-
-	// back side
-	4, 5, 6,
-	6, 5, 7,
-
-	// left side 
-	8, 9, 10,
-	10, 9, 11,
-
-	// right side
-	13, 12, 14,
-	13, 14, 15,
-
-	// top 
-	17, 16, 18,
-	17, 18, 19,
-
-	// bottom
-	20, 21, 22,
-	22, 21, 23
-};
 
 
 int main()
@@ -132,16 +68,17 @@ int main()
 	// Generates Shader object using shaders defualt.vert and default.frag
 	Shader shaderProgram("./res/shaders/default.vert", "./res/shaders/default.frag");
 
-
+	Chunk chunk;
+	chunk.generateChunk();
 
 	// Generates Vertex Array Object and binds it
 	VAO VAO1;
 	VAO1.Bind();
 
 	// Generates Vertex Buffer Object and links it to vertices
-	VBO VBO1(vertices, sizeof(vertices));
+	VBO VBO1(chunk.vertices, chunk.vertices.size() * sizeof(float));
 	// Generates Element Buffer Object and links it to indices
-	EBO EBO1(indices, sizeof(indices));
+	EBO EBO1(chunk.indices, chunk.indices.size() * sizeof(int));
 
 	// Links VBO to VAO
 	VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
@@ -165,21 +102,11 @@ int main()
 	glFrontFace(GL_CCW);
 
 	// variables needed to calculate FPS
-	double currTime, prevTime, timeDiff = 0.0f;
-	unsigned int counter = 0;
+	// double currTime, prevTime, timeDiff = 0.0f;
+	// unsigned int counter = 0;
 
-	glm::vec3 cubePositions[] = {
-		glm::vec3( 0.0f,  0.0f,  0.0f), 
-		glm::vec3( 2.0f,  5.0f, -15.0f), 
-		glm::vec3(-1.5f, -2.2f, -2.5f),  
-		glm::vec3(-3.8f, -2.0f, -12.3f),  
-		glm::vec3( 2.4f, -0.4f, -3.5f),  
-		glm::vec3(-1.7f,  3.0f, -7.5f),  
-		glm::vec3( 1.3f, -2.0f, -2.5f),  
-		glm::vec3( 1.5f,  2.0f, -2.5f), 
-		glm::vec3( 1.5f,  0.2f, -1.5f), 
-		glm::vec3(-1.3f,  1.0f, -1.5f)  
-	};
+	// variables to get drawing a frame 
+	double currFrameDraw, prevFrameDraw = 0.0f; 
 
 
 	Camera camera(window_width, window_height, glm::vec3(0.0f, 0.0f, 3.0f));
@@ -187,18 +114,21 @@ int main()
 	// Main while loop
 	while (!glfwWindowShouldClose(window))
 	{
+		currFrameDraw =  glfwGetTime();
 		// FPS calculation 
-		currTime = glfwGetTime();
-		timeDiff = currTime - prevTime;
-		counter++;
+		// currTime = glfwGetTime();
+		// timeDiff = currTime - prevTime;
+		// counter++;
 	
-		if (timeDiff >= (1.0/30.0))
-		{
-			std::cout << "\033[H\033[J"; // clears window idk black magic 
-			std::cout <<  "FPS : " <<  counter/timeDiff << std::endl;
-			prevTime = currTime;
-			counter = 0;
-		}
+		// if (timeDiff >= (1.0/30.0))
+		// {
+		// 	std::cout << "\033[H\033[J"; // clears window idk black magic 
+		// 	std::cout << "Vertices count: " << chunk.vertices.size() << std::endl;
+		// 	std::cout << "Indices count: " << chunk.indices.size() << std::endl;
+		// 	std::cout <<  "FPS : " <<  counter/timeDiff << std::endl;
+		// 	prevTime = currTime;
+		// 	counter = 0;
+		// }
 
 		
 		// Specify the color of the background
@@ -212,29 +142,17 @@ int main()
 		camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix");
 
 		wall.Bind();
-		// Bind the VAO so OpenGL knows to use it
 		VAO1.Bind();
 
-		for(int i = 0; i <= 10; i++)
-		{
-			glm::mat4 model = glm::mat4(1.0f);
-			model = glm::translate(model, cubePositions[i]);
-			float angle = 20.0f * i; 
-			if(i % 3 == 0)
-			{
-				angle = glfwGetTime() * 25.0f;
-				model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
-			}
-
-			GLuint model_unifrom =  glGetUniformLocation(shaderProgram.ID, "modelMatrix");
-			glUniformMatrix4fv(model_unifrom, 1, GL_FALSE, glm::value_ptr(model));
-			// Draw primitives, number of indices, datatype of indices, index of indices
-			glDrawElements(GL_TRIANGLES, sizeof(vertices)/sizeof(int), GL_UNSIGNED_INT, 0);
-		}
+		glDrawElements(GL_TRIANGLES, chunk.indices.size(), GL_UNSIGNED_INT, 0);
 		// Swap the back buffer with the front buffer
 		glfwSwapBuffers(window);
 		// Take care of all GLFW events
 		glfwPollEvents();
+
+		std::cout << "Frame draw: " << (currFrameDraw - prevFrameDraw) * 1000 << " ms" << std::endl;
+
+		prevFrameDraw = currFrameDraw;
 	}
 
 

@@ -53,6 +53,11 @@ void Camera::Inputs(GLFWwindow* window)
 	{
 		Position += speed * -Up;
 	}
+	if(glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS)
+	{
+		wireframeMode = !wireframeMode;
+		glPolygonMode(GL_FRONT_AND_BACK, wireframeMode ? GL_LINE : GL_FILL);
+	}
 	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
 	{
 		speed = 0.4f;
