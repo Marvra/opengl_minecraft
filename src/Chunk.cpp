@@ -28,7 +28,14 @@ void Chunk::generateChunk()
                 if(y == 0)              block.addFace(Sides::DOWN, x, y, z, &baseIndex);
                 if(y == CHUNK_SIZE_Y)   block.addFace(Sides::TOP, x, y, z, &baseIndex);
                 if(x == 0)              block.addFace(Sides::LEFT, x, y, z, &baseIndex);
-                if(x == CHUNK_SIZE_X)   block.addFace(Sides::RIGHT, x, y, z, &baseIndex);      
+                if(x == CHUNK_SIZE_X)   block.addFace(Sides::RIGHT, x, y, z, &baseIndex);
+                
+                //block.addFace(Sides::FRONT, x, y, z, &baseIndex);
+                //block.addFace(Sides::BACK, x, y, z, &baseIndex);
+                //block.addFace(Sides::DOWN, x, y, z, &baseIndex);
+                //block.addFace(Sides::TOP, x, y, z, &baseIndex);
+                //block.addFace(Sides::LEFT, x, y, z, &baseIndex);
+                //block.addFace(Sides::RIGHT, x, y, z, &baseIndex);
             }
         }
     }

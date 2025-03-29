@@ -321,11 +321,11 @@ int main()
 	// glFrontFace(GL_CCW);
 
 	// variables needed to calculate FPS
-	// double currTime, prevTime, timeDiff = 0.0f;
-	// unsigned int counter = 0;
+	double currTime, prevTime, timeDiff = 0.0f;
+	unsigned int counter = 0;
 
 	// variables to get drawing a frame 
-	double currFrameDraw, prevFrameDraw = 0.0f; 
+	//double currFrameDraw, prevFrameDraw = 0.0f; 
 
 
 	Camera camera(window_width, window_height, glm::vec3(0.0f, 0.0f, 3.0f));
@@ -333,21 +333,21 @@ int main()
 	// Main while loop
 	while (!glfwWindowShouldClose(window))
 	{
-		currFrameDraw =  glfwGetTime();
-		// FPS calculation 
-		// currTime = glfwGetTime();
-		// timeDiff = currTime - prevTime;
-		// counter++;
+		//currFrameDraw =  glfwGetTime();
+		//FPS calculation 
+		currTime = glfwGetTime();
+		timeDiff = currTime - prevTime;
+		counter++;
 	
-		// if (timeDiff >= (1.0/30.0))
-		// {
-		// 	std::cout << "\033[H\033[J"; // clears window idk black magic 
-		// 	std::cout << "Vertices count: " << chunk.vertices.size() << std::endl;
-		// 	std::cout << "Indices count: " << chunk.indices.size() << std::endl;
-		// 	std::cout <<  "FPS : " <<  counter/timeDiff << std::endl;
-		// 	prevTime = currTime;
-		// 	counter = 0;
-		// }
+		if (timeDiff >= (1.0/30.0))
+		{
+			std::cout << "\033[H\033[J"; // clears window idk black magic 
+			std::cout << "Vertices count: " << chunk.vertices.size() << std::endl;
+			std::cout << "Indices count: " << chunk.indices.size() << std::endl;
+			std::cout <<  "FPS : " <<  counter/timeDiff << std::endl;
+			prevTime = currTime;
+			counter = 0;
+		}
 
 		
 		// Specify the color of the background
@@ -369,9 +369,9 @@ int main()
 		// Take care of all GLFW events
 		glfwPollEvents();
 
-		std::cout << "Frame draw: " << (currFrameDraw - prevFrameDraw) * 1000 << " ms" << std::endl;
+		//std::cout << "Frame draw: " << (currFrameDraw - prevFrameDraw) * 1000 << " ms" << std::endl;
 
-		prevFrameDraw = currFrameDraw;
+		//prevFrameDraw = currFrameDraw;
 	}
 
 
