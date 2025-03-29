@@ -14,6 +14,7 @@ class Chunk
 {
 private:
 
+    //bool chunk_block[CHUNK_SIZE_X][CHUNK_SIZE_Y][CHUNK_SIZE_Z] = {false};
     // std::vector<float> vertices;
     // std::vector<unsigned int> indices;
 
