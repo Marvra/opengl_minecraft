@@ -4,6 +4,8 @@
 #include<chrono>
 #include<glad/glad.h>
 #include<GLFW/glfw3.h>
+#include<math.h>
+#include<OpenSimplexNoise.hh>
 #include"Block.h"
 #include"VAO.h"
 #include"EBO.h"
@@ -27,14 +29,12 @@ private:
     VBO VBO1;
     EBO EBO1;
 
-    // std::vector<float> vertices;
-    // std::vector<unsigned int> indices;
-
-    //int generated = 1;
+    int chunkPosX;
+    int chunkPosZ;
 
 public:
 
-    Chunk();
+    Chunk(int chunkPosX, int chunkPosZ);
     ~Chunk();
 
     void generateChunkPattern();
@@ -42,4 +42,7 @@ public:
     void generateChunk();
 
     void render();
+
+    int getIndicesCount();
+    int getVerticesCount();
 };

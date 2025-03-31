@@ -1,6 +1,6 @@
 # Compiler and flags
 CXX := g++
-CXXFLAGS := -Wall -std=c++17 -Iexternal/glad/include -Iexternal/stb/src
+CXXFLAGS := -Wall -std=c++17 -Iexternal/glad/include -Iexternal/stb/src -Iexternal/noise/
 
 # Libraries
 LDFLAGS := -lGL -lglfw
