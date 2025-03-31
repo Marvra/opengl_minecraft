@@ -1,9 +1,13 @@
 #pragma once
 
 #include<vector>
+#include<chrono>
 #include<glad/glad.h>
 #include<GLFW/glfw3.h>
 #include"Block.h"
+#include"VAO.h"
+#include"EBO.h"
+#include"VBO.h"
 
 #define CHUNK_SIZE_X 8
 #define CHUNK_SIZE_Y 16
@@ -14,7 +18,15 @@ class Chunk
 {
 private:
 
-    //bool chunk_block[CHUNK_SIZE_X][CHUNK_SIZE_Y][CHUNK_SIZE_Z] = {false};
+    bool chunk_block[CHUNK_SIZE_X][CHUNK_SIZE_Y][CHUNK_SIZE_Z];
+
+    std::vector<float> vertices;
+    std::vector<unsigned int> indices;
+
+    VAO VAO1;
+    VBO VBO1;
+    EBO EBO1;
+
     // std::vector<float> vertices;
     // std::vector<unsigned int> indices;
 
@@ -22,11 +34,12 @@ private:
 
 public:
 
-    std::vector<float> vertices;
-    std::vector<unsigned int> indices;
-
     Chunk();
     ~Chunk();
 
+    void generateChunkPattern();
+
     void generateChunk();
+
+    void render();
 };
