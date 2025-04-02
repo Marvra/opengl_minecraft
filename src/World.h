@@ -2,13 +2,14 @@
 
 #include<iostream>
 #include<unordered_map>
+#include<tuple>
 #include"Chunk.h"
-#include"PairHash.h"
+#include"TupleHash.h"
 
 class World
 {
 private:
-    std::unordered_map<std::pair<int, int>, Chunk, hash_pair> chunks;
+    std::unordered_map<std::tuple<int, int, int>, Chunk, TupleHash> chunks;
 
 public:
     World(){};

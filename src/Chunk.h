@@ -11,16 +11,19 @@
 #include"EBO.h"
 #include"VBO.h"
 
-#define CHUNK_SIZE_X 8
+#define CHUNK_SIZE_X 16
 #define CHUNK_SIZE_Y 16
-#define CHUNK_SIZE_Z 8
+#define CHUNK_SIZE_Z 16
+
+#define MAX_TERRAIN_HEIGHT 30
+#define MIN_TERRAIN_HEIGHT 15
 
 
 class Chunk
 {
 private:
 
-    bool chunk_block[CHUNK_SIZE_X][CHUNK_SIZE_Y][CHUNK_SIZE_Z];
+    Types chunkBlockExists[CHUNK_SIZE_X][CHUNK_SIZE_Y][CHUNK_SIZE_Z];
 
     std::vector<float> vertices;
     std::vector<unsigned int> indices;
@@ -30,11 +33,12 @@ private:
     EBO EBO1;
 
     int chunkPosX;
+    int chunkPosY;
     int chunkPosZ;
 
 public:
 
-    Chunk(int chunkPosX, int chunkPosZ);
+    Chunk(int chunkPosX, int chunkPosY, int chunkPosZ);
     ~Chunk();
 
     void generateChunkPattern();

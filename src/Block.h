@@ -13,42 +13,72 @@ enum Sides
     DOWN = 5
 };
 
+enum Types
+{
+    AIR = -1,
+    GRASS = 0,
+    DIRT = 1,
+    STONE = 2
+};
+
+static const float blockTextureCoords[3][8] = {
+    {
+        0.5f, 0.0f, 
+        1.0f, 0.0f,  
+        0.5f, 0.5f, 
+        1.0f, 0.5f //GRASS
+    },
+    {
+        0.0f, 0.5f,   
+        0.5f, 0.5f,   
+        0.0f, 1.0f,   
+        0.5f, 1.0f //DIRT
+    },
+    {
+        0.0f, 0.0f, 
+        0.5f, 0.0f,  
+        0.0f, 0.5f, 
+        0.5f, 0.5f //STONE
+    }
+
+};
+
 static const float faceVertices[6][32] = {
     { // FRONT (-Z)
-        0.0f, 0.0f, 1.0f,  1.0f, 0.0f, 0.0f,  0.0f, 0.0f,
-        1.0f, 0.0f, 1.0f,  1.0f, 0.0f, 0.0f,  1.0f, 0.0f,
-        0.0f, 1.0f, 1.0f,  1.0f, 0.0f, 0.0f,  0.0f, 1.0f,
-        1.0f, 1.0f, 1.0f,  1.0f, 0.0f, 0.0f,  1.0f, 1.0f,
+        0.0f, 0.0f, 1.0f,  0.0f, 0.0f,
+        1.0f, 0.0f, 1.0f,  1.0f, 0.0f,
+        0.0f, 1.0f, 1.0f,  0.0f, 1.0f,
+        1.0f, 1.0f, 1.0f,  1.0f, 1.0f,
     },
     { // BACK (+X)
-        0.0f, 0.0f, 0.0f,  0.0f, 1.0f, 0.0f,  0.0f, 0.0f,
-        1.0f, 0.0f, 0.0f,  0.0f, 1.0f, 0.0f,  1.0f, 0.0f,
-        0.0f, 1.0f, 0.0f,  0.0f, 1.0f, 0.0f,  0.0f, 1.0f,
-        1.0f, 1.0f, 0.0f,  0.0f, 1.0f, 0.0f,  1.0f, 1.0f,
+        0.0f, 0.0f, 0.0f,  0.0f, 0.0f,
+        1.0f, 0.0f, 0.0f,  1.0f, 0.0f,
+        0.0f, 1.0f, 0.0f,  0.0f, 1.0f,
+        1.0f, 1.0f, 0.0f,  1.0f, 1.0f,
     },
     { // BOTTOM (-Y)
-        0.0f, 0.0f, 1.0f,  0.0f, 0.0f, 1.0f,  0.0f, 0.0f,
-        0.0f, 0.0f, 0.0f,  0.0f, 0.0f, 1.0f,  1.0f, 0.0f,
-        0.0f, 1.0f, 1.0f,  0.0f, 0.0f, 1.0f,  0.0f, 1.0f,
-        0.0f, 1.0f, 0.0f,  0.0f, 0.0f, 1.0f,  1.0f, 1.0f,
+        0.0f, 0.0f, 1.0f,  0.0f, 0.0f,
+        0.0f, 0.0f, 0.0f,  1.0f, 0.0f,
+        0.0f, 1.0f, 1.0f,  0.0f, 1.0f,
+        0.0f, 1.0f, 0.0f,  1.0f, 1.0f,
     },
     { // TOP (+Y)
-        1.0f, 0.0f, 1.0f,  1.0f, 1.0f, 0.0f,  0.0f, 0.0f,
-        1.0f, 0.0f, 0.0f,  1.0f, 1.0f, 0.0f,  1.0f, 0.0f,
-        1.0f, 1.0f, 1.0f,  1.0f, 1.0f, 0.0f,  0.0f, 1.0f,
-        1.0f, 1.0f, 0.0f,  1.0f, 1.0f, 0.0f,  1.0f, 1.0f,
+        1.0f, 0.0f, 1.0f,  0.0f, 0.0f,
+        1.0f, 0.0f, 0.0f,  1.0f, 0.0f,
+        1.0f, 1.0f, 1.0f,  0.0f, 1.0f,
+        1.0f, 1.0f, 0.0f,  1.0f, 1.0f,
     },
     { // RIGHT (-Z)
-        0.0f, 1.0f, 1.0f,  1.0f, 0.0f, 1.0f,  0.0f, 0.0f,
-        1.0f, 1.0f, 1.0f,  1.0f, 0.0f, 1.0f,  1.0f, 0.0f,
-        0.0f, 1.0f, 0.0f,  1.0f, 0.0f, 1.0f,  0.0f, 1.0f,
-        1.0f, 1.0f, 0.0f,  1.0f, 0.0f, 1.0f,  1.0f, 1.0f,
+        0.0f, 1.0f, 1.0f,  0.0f, 0.0f,
+        1.0f, 1.0f, 1.0f,  1.0f, 0.0f,
+        0.0f, 1.0f, 0.0f,  0.0f, 1.0f,
+        1.0f, 1.0f, 0.0f,  1.0f, 1.0f,
     },
     { // LEFT (+Z)
-        0.0f, 0.0f, 1.0f,  0.0f, 1.0f, 1.0f,  0.0f, 0.0f,
-        1.0f, 0.0f, 1.0f,  0.0f, 1.0f, 1.0f,  1.0f, 0.0f,
-        0.0f, 0.0f, 0.0f,  0.0f, 1.0f, 1.0f,  0.0f, 1.0f,
-        1.0f, 0.0f, 0.0f,  0.0f, 1.0f, 1.0f,  1.0f, 1.0f,
+        0.0f, 0.0f, 1.0f,  0.0f, 0.0f,
+        1.0f, 0.0f, 1.0f,  1.0f, 0.0f,
+        0.0f, 0.0f, 0.0f,  0.0f, 1.0f,
+        1.0f, 0.0f, 0.0f,  1.0f, 1.0f,
     }
 };
 
@@ -61,13 +91,14 @@ static const unsigned int cubeIndices[6] = {
 class Block
 {
 private:
-    //bool type = false;
     int postion_x;
     int postion_y;
     int postion_z;
 
     std::vector<float>* vertices;
     std::vector<unsigned int>* indices;
+
+    void textureFace(Types type);
 
 
 public:
@@ -81,5 +112,5 @@ public:
     void setY(int y) { postion_y = y; }
     void setZ(int z) { postion_z = z; }
 
-    void addFace(Sides side, int x, int y, int z, int* count);
+    void addFace(Sides side, int x, int y, int z, Types type, int* count);
 };

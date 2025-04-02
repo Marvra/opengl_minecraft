@@ -27,7 +27,7 @@ int main()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 
-	GLFWwindow* window = glfwCreateWindow(window_width, window_height, "YoutubeOpenGL", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(window_width, window_height, "mc", NULL, NULL);
 
 	if (window == NULL)
 	{
@@ -60,9 +60,9 @@ int main()
 	World world;
 	world.generateChunks();
 
-	std::string texturePath = "./res/textures/wall.jpg";
+	std::string texturePath = "./res/textures/base_block.png";
 
-	Texture wall(texturePath.c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGB, GL_UNSIGNED_BYTE);
+	Texture wall(texturePath.c_str(), GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 	wall.texUnit(shaderProgram, "tex0", 0);
 
 
