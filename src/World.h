@@ -15,6 +15,7 @@ public:
     World(){};
     ~World(){};
 
-    void generateChunks();
+    void generateChunks(int camPosX, int camPosZ);
+    void destroyChunks(int camPosX, int camPosZ);
     void renderChunks();
 };

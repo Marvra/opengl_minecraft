@@ -58,7 +58,7 @@ int main()
 	Shader shaderProgram("./res/shaders/default.vert", "./res/shaders/default.frag");
 
 	World world;
-	world.generateChunks();
+	//world.generateChunks();
 
 	std::string texturePath = "./res/textures/base_block.png";
 
@@ -69,7 +69,7 @@ int main()
 	glEnable(GL_DEPTH_TEST);
 	// glEnable(GL_CULL_FACE);
 	// glCullFace(GL_FRONT);
-	// glFrontFace(GL_CCW);
+	// glFrontFace(GL_CW);
 
 	// variables needed to calculate FPS
 	// double currTime, prevTime, timeDiff = 0.0f;
@@ -78,12 +78,13 @@ int main()
 	// variables to get drawing a frame 
 	//double currFrameDraw, prevFrameDraw = 0.0f; 
 
+	int camPosX, camPosZ;
+
 
 	Camera camera(window_width, window_height, glm::vec3(0.0f, 0.0f, 3.0f));
 
 	while (!glfwWindowShouldClose(window))
 	{
-	
 		//currFrameDraw =  glfwGetTime();
 		//FPS calculation 
 		// currTime = glfwGetTime();
@@ -102,17 +103,21 @@ int main()
 
 		
 		// Specify the color of the background
-		glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
+		glClearColor(0.43f, 0.69f, 1.0f, 1.0f);
 		// Clean the back buffer and assign the new color to it
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		// Tell OpenGL which Shader Program we want to use
 		shaderProgram.Activate();
 
-		camera.Inputs(window);
-		camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix");
+		camera.Inputs(window, &camPosX, &camPosZ);
+		std::cout << "POS X : " << camPosX << " POS Z : " << camPosZ << std::endl;
+		camera.Matrix(45.0f, 0.1f, 200.0f, shaderProgram, "camMatrix");
+
+		world.generateChunks(camPosX, camPosZ);
+		world.destroyChunks(camPosX, camPosZ);
+		
 
 		wall.Bind();
-
 		world.renderChunks();
 		// Swap the back buffer with the front buffer
 		glfwSwapBuffers(window);

@@ -22,9 +22,9 @@ Chunk::Chunk(int chunkPosX, int chunkPosY, int chunkPosZ) : chunkPosX(chunkPosX)
 Chunk::~Chunk()
 {
     // THIS SEGFAULTS WHEN SCREEN IS CLOSED
-    // VAO1.Delete();
-	// VBO1.Delete();
-	// EBO1.Delete();
+    VAO1.Delete();
+	VBO1.Delete();
+	EBO1.Delete();
 }
 
 void Chunk::generateChunkPattern()
@@ -33,12 +33,12 @@ void Chunk::generateChunkPattern()
     OSN::Noise<3> cave;
 
     for (int x = 0; x < CHUNK_SIZE_X; x++) {
-        std::cout << "  ChunkPos : " << chunkPosX << " " << chunkPosY<< " " << chunkPosZ <<  std::endl;
+        //std::cout << "  ChunkPos : " << chunkPosX << " " << chunkPosY<< " " << chunkPosZ <<  std::endl;
         for (int z = 0; z < CHUNK_SIZE_Z; z++) {
 
             float surfaceNoise = surface.eval((float)(chunkPosX+x) * 0.02f,(float)(chunkPosZ+z) * 0.02f);
 
-            int height = (int)((surfaceNoise) * 0.5f * (120 - 50) + 50);
+            int height = (int)((surfaceNoise) * 0.5f * (80 - 30) + 30);
 
 
             for (int y = 0; y < CHUNK_SIZE_Y; y++) {
